@@ -1,2 +1,5 @@
 Project-Definition2-traffic-vehicle.ipynb
-dataset
+dataset/
+src/__pycache__/
+.vscode/
+checkpoints/
