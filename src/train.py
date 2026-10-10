@@ -218,7 +218,6 @@ def save_experiment_result(
 # ============================================================
 # Main training function
 # ============================================================
-
 def train_model(
     model,
     train_loader,
@@ -231,106 +230,92 @@ def train_model(
     class_to_idx,
     seed,
     config,
-    threshold=None
+    threshold=None,
+    scheduler=None,
+    early_stopping=False,
+    patience=3,
+    min_delta=0.0
 ):
-
     history = {
         "train_loss": [],
         "train_accuracy": [],
         "val_loss": [],
-        "val_accuracy": []
+        "val_accuracy": [],
+        "learning_rate": []
     }
 
-    # --------------------------------------------------------
-    # Best validation result
-    # --------------------------------------------------------
-
     best_val_accuracy = float("-inf")
-
     best_val_loss = None
-
     best_epoch = None
 
-    # --------------------------------------------------------
-    # Checkpoint path
-    # --------------------------------------------------------
+    # Counter for Early Stopping
+    epochs_without_improvement = 0
 
-    checkpoint_path = (
-        CHECKPOINT_DIR /
-        f"{model_name}_best.pt"
-    )
-
-    # --------------------------------------------------------
-    # Training loop
-    # --------------------------------------------------------
+    checkpoint_path = CHECKPOINT_DIR / f"{model_name}_best.pt"
 
     for epoch in range(epochs):
 
         # -------------------------
         # Train
         # -------------------------
-
         train_loss, train_accuracy = train_one_epoch(
-            model=model,
-            loader=train_loader,
-            criterion=criterion,
-            optimizer=optimizer,
-            device=device
+            model,
+            train_loader,
+            criterion,
+            optimizer,
+            device
         )
 
         # -------------------------
         # Validation
         # -------------------------
-
         val_loss, val_accuracy = evaluate(
-            model=model,
-            loader=val_loader,
-            criterion=criterion,
-            device=device
+            model,
+            val_loader,
+            criterion,
+            device
         )
 
-        # -------------------------
-        # Store history
-        # -------------------------
+        current_lr = optimizer.param_groups[0]["lr"]
 
+        # -------------------------
+        # Save history
+        # -------------------------
         history["train_loss"].append(train_loss)
-
         history["train_accuracy"].append(train_accuracy)
-
         history["val_loss"].append(val_loss)
-
         history["val_accuracy"].append(val_accuracy)
-
-        # -------------------------
-        # Print results
-        # -------------------------
+        history["learning_rate"].append(current_lr)
 
         print(
-            f"Epoch [{epoch + 1}/{epochs}] "
-            f"Train Loss: {train_loss:.4f} --- "
-            f"Train Acc: {train_accuracy:.4f} --- "
-            f"Val Loss: {val_loss:.4f} --- "
-            f"Val Acc: {val_accuracy:.4f}"
+            f"Epoch [{epoch+1}/{epochs}] "
+            f"Train Loss: {train_loss:.4f} "
+            f"--- Train Acc: {train_accuracy:.4f} "
+            f"--- Val Loss: {val_loss:.4f} "
+            f"--- Val Acc: {val_accuracy:.4f} "
+            f"--- LR: {current_lr:.6f}"
         )
 
         # -------------------------
-        # Check best model
+        # Check improvement
         # -------------------------
+        improved = val_accuracy > best_val_accuracy + min_delta
 
-        if val_accuracy > best_val_accuracy:
+        if improved:
 
             best_val_accuracy = val_accuracy
-
             best_val_loss = val_loss
-
             best_epoch = epoch + 1
+
+            # Reset Early Stopping counter
+            epochs_without_improvement = 0
 
             save_checkpoint(
                 model=model,
                 optimizer=optimizer,
-                epoch=best_epoch,
-                val_accuracy=best_val_accuracy,
-                val_loss=best_val_loss,
+                epoch=epoch + 1,
+                val_accuracy=val_accuracy,
+                val_loss=val_loss,
                 path=checkpoint_path,
                 class_to_idx=class_to_idx,
                 seed=seed,
@@ -338,10 +323,44 @@ def train_model(
                 threshold=threshold
             )
 
-    # ========================================================
-    # Save experiment summary
-    # ========================================================
+            print("  → Validation accuracy improved. Checkpoint saved.")
 
+        else:
+
+            if early_stopping:
+                epochs_without_improvement += 1
+
+                print(
+                    f"  → No improvement "
+                    f"({epochs_without_improvement}/{patience})"
+                )
+
+        # -------------------------
+        # Scheduler
+        # -------------------------
+        if scheduler is not None:
+            scheduler.step(val_loss)
+
+        # -------------------------
+        # Early Stopping
+        # -------------------------
+        if (
+            early_stopping
+            and epochs_without_improvement >= patience
+        ):
+            print(
+                f"\nEarly stopping triggered at epoch {epoch+1}."
+            )
+            print(
+                f"Best validation accuracy: "
+                f"{best_val_accuracy:.4f} "
+                f"at epoch {best_epoch}"
+            )
+            break
+
+    # -------------------------
+    # Save experiment result
+    # -------------------------
     save_experiment_result(
         model_name=model_name,
         best_epoch=best_epoch,
@@ -354,16 +373,207 @@ def train_model(
         threshold=threshold
     )
 
-    # ========================================================
-    # Final messages
-    # ========================================================
+    return history, best_val_accuracy
 
-    print()
-    print("Best checkpoint saved:")
-    print(checkpoint_path)
 
-    print()
-    print("Experiment results updated:")
-    print(RESULTS_FILE)
+# BCE Training Functions
+import torch
+import torch.nn.functional as F
+
+
+def train_one_epoch_bce(
+    model,
+    loader,
+    criterion,
+    optimizer,
+    device,
+    num_classes
+):
+    model.train()
+
+    running_loss = 0.0
+    correct = 0
+    total = 0
+
+    for images, labels in loader:
+
+        images = images.to(device)
+        labels = labels.to(device)
+
+        optimizer.zero_grad()
+
+        logits = model(images)
+
+        targets = F.one_hot(
+            labels,
+            num_classes=num_classes
+        ).float()
+
+        loss = criterion(logits, targets)
+
+        loss.backward()
+        optimizer.step()
+
+        running_loss += loss.item() * images.size(0)
+
+        predictions = logits.argmax(dim=1)
+
+        correct += (
+            predictions == labels
+        ).sum().item()
+
+        total += labels.size(0)
+
+    epoch_loss = running_loss / total
+    epoch_accuracy = correct / total
+
+    return epoch_loss, epoch_accuracy
+
+
+def evaluate_bce(
+    model,
+    loader,
+    criterion,
+    device,
+    num_classes
+):
+    model.eval()
+
+    running_loss = 0.0
+    correct = 0
+    total = 0
+
+    with torch.no_grad():
+
+        for images, labels in loader:
+
+            images = images.to(device)
+            labels = labels.to(device)
+
+            logits = model(images)
+
+            targets = F.one_hot(
+                labels,
+                num_classes=num_classes
+            ).float()
+
+            loss = criterion(logits, targets)
+
+            running_loss += loss.item() * images.size(0)
+
+            predictions = logits.argmax(dim=1)
+
+            correct += (
+                predictions == labels
+            ).sum().item()
+
+            total += labels.size(0)
+
+    epoch_loss = running_loss / total
+    epoch_accuracy = correct / total
+
+    return epoch_loss, epoch_accuracy
+
+
+def train_model_bce(
+    model,
+    train_loader,
+    val_loader,
+    criterion,
+    optimizer,
+    device,
+    epochs,
+    model_name,
+    class_to_idx,
+    seed,
+    config,
+    num_classes,
+    threshold=None,
+    scheduler=None
+):
+    history = {
+        "train_loss": [],
+        "train_accuracy": [],
+        "val_loss": [],
+        "val_accuracy": [],
+        "learning_rate": []
+    }
+
+    best_val_accuracy = float("-inf")
+    best_val_loss = None
+    best_epoch = None
+
+    checkpoint_path = CHECKPOINT_DIR / f"{model_name}_best.pt"
+
+    for epoch in range(epochs):
+
+        train_loss, train_accuracy = train_one_epoch_bce(
+            model,
+            train_loader,
+            criterion,
+            optimizer,
+            device,
+            num_classes
+        )
+
+        val_loss, val_accuracy = evaluate_bce(
+            model,
+            val_loader,
+            criterion,
+            device,
+            num_classes
+        )
+
+        current_lr = optimizer.param_groups[0]["lr"]
+
+        history["train_loss"].append(train_loss)
+        history["train_accuracy"].append(train_accuracy)
+        history["val_loss"].append(val_loss)
+        history["val_accuracy"].append(val_accuracy)
+        history["learning_rate"].append(current_lr)
+
+        print(
+            f"Epoch [{epoch+1}/{epochs}] "
+            f"Train Loss: {train_loss:.4f} "
+            f"--- Train Acc: {train_accuracy:.4f} "
+            f"--- Val Loss: {val_loss:.4f} "
+            f"--- Val Acc: {val_accuracy:.4f} "
+            f"--- LR: {current_lr:.6f}"
+        )
+
+        # Save best model
+        if val_accuracy > best_val_accuracy:
+            best_val_accuracy = val_accuracy
+            best_val_loss = val_loss
+            best_epoch = epoch + 1
+
+            save_checkpoint(
+                model=model,
+                optimizer=optimizer,
+                epoch=epoch + 1,
+                val_accuracy=val_accuracy,
+                val_loss=val_loss,
+                path=checkpoint_path,
+                class_to_idx=class_to_idx,
+                seed=seed,
+                config=config,
+                threshold=threshold
+            )
+
+        # Scheduler
+        if scheduler is not None:
+            scheduler.step(val_loss)
+
+    save_experiment_result(
+        model_name=model_name,
+        best_epoch=best_epoch,
+        best_val_accuracy=best_val_accuracy,
+        best_val_loss=best_val_loss,
+        seed=seed,
+        class_to_idx=class_to_idx,
+        config=config,
+        checkpoint_path=checkpoint_path,
+        threshold=threshold
+    )
 
     return history, best_val_accuracy
