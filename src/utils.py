@@ -97,7 +97,8 @@ def get_classification_report(
     model,
     loader,
     class_names,
-    device
+    device,
+    output_dict=False
 ):
     true_labels, predictions = get_predictions(
         model,
@@ -109,7 +110,8 @@ def get_classification_report(
         true_labels,
         predictions,
         target_names=class_names,
-        digits=4
+        digits=4,
+        output_dict=output_dict
     )
 
     print(report)
@@ -177,3 +179,5 @@ def set_seed(seed=42):
     if torch.cuda.is_available():
         torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
