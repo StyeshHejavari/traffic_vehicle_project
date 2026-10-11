@@ -1,0 +1,793 @@
+{
+    "baseline_cnn": {
+        "best_epoch": 9,
+        "best_val_accuracy": 0.7893961708394698,
+        "best_val_loss": 1.1164248662072183,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "model": "SimpleCNN",
+            "num_classes": 8,
+            "dropout": 0.0,
+            "use_gap": false,
+            "batch_size": 32,
+            "learning_rate": 0.001,
+            "epochs": 10,
+            "train_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ],
+            "val_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ]
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\baseline_cnn_best.pt"
+    },
+    "augmentation": {
+        "best_epoch": 10,
+        "best_val_accuracy": 0.7790868924889544,
+        "best_val_loss": 0.7244209195206022,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "model": "SimpleCNN",
+            "experiment": "Augmentation",
+            "num_classes": 8,
+            "dropout": 0.0,
+            "use_gap": false,
+            "batch_size": 32,
+            "learning_rate": 0.001,
+            "epochs": 10,
+            "train_transform": [
+                "letterbox",
+                "Resize(224,224)",
+                "RandomHorizontalFlip(p=0.5)",
+                "RandomRotation(10)",
+                "ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2)",
+                "ToTensor",
+                "Normalize"
+            ],
+            "val_transform": [
+                "letterbox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ]
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\augmentation_best.pt"
+    },
+    "dropout_02": {
+        "best_epoch": 9,
+        "best_val_accuracy": 0.7555228276877761,
+        "best_val_loss": 1.0749593376235513,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "model": "SimpleCNN",
+            "experiment": "dropout",
+            "dropout": 0.2,
+            "num_classes": 8,
+            "batch_size": 32,
+            "learning_rate": 0.001,
+            "epochs": 10,
+            "seed": 42,
+            "train_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ],
+            "val_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ]
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\dropout_02_best.pt"
+    },
+    "dropout_03": {
+        "best_epoch": 9,
+        "best_val_accuracy": 0.7702503681885126,
+        "best_val_loss": 0.9325936391883817,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "model": "SimpleCNN",
+            "experiment": "dropout",
+            "dropout": 0.3,
+            "num_classes": 8,
+            "batch_size": 32,
+            "learning_rate": 0.001,
+            "epochs": 10,
+            "seed": 42,
+            "train_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ],
+            "val_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ]
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\dropout_03_best.pt"
+    },
+    "dropout_05": {
+        "best_epoch": 10,
+        "best_val_accuracy": 0.7496318114874816,
+        "best_val_loss": 0.8809006993654726,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "model": "SimpleCNN",
+            "experiment": "dropout",
+            "dropout": 0.5,
+            "num_classes": 8,
+            "batch_size": 32,
+            "learning_rate": 0.001,
+            "epochs": 10,
+            "seed": 42,
+            "train_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ],
+            "val_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ]
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\dropout_05_best.pt"
+    },
+    "avg_pooling": {
+        "best_epoch": 5,
+        "best_val_accuracy": 0.7245949926362297,
+        "best_val_loss": 0.953293643573598,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "model": "SimpleCNNAvgPool",
+            "experiment": "AvgPool2d",
+            "num_classes": 8,
+            "dropout": 0.0,
+            "use_gap": false,
+            "batch_size": 32,
+            "learning_rate": 0.001,
+            "epochs": 10,
+            "train_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ],
+            "val_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ]
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\avg_pooling_best.pt"
+    },
+    "weight_decay_0": {
+        "best_epoch": 10,
+        "best_val_accuracy": 0.7614138438880707,
+        "best_val_loss": 1.3451686284679025,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "model": "SimpleCNN",
+            "experiment": "weight_decay",
+            "weight_decay": 0,
+            "optimizer": "AdamW",
+            "num_classes": 8,
+            "dropout": 0.0,
+            "use_gap": false,
+            "batch_size": 32,
+            "learning_rate": 0.001,
+            "epochs": 10,
+            "train_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ],
+            "val_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ]
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\weight_decay_0_best.pt"
+    },
+    "weight_decay_1e4": {
+        "best_epoch": 10,
+        "best_val_accuracy": 0.7820324005891016,
+        "best_val_loss": 1.1418304064136893,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "model": "SimpleCNN",
+            "experiment": "weight_decay",
+            "weight_decay": 0.0001,
+            "optimizer": "AdamW",
+            "num_classes": 8,
+            "dropout": 0.0,
+            "use_gap": false,
+            "batch_size": 32,
+            "learning_rate": 0.001,
+            "epochs": 10,
+            "train_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ],
+            "val_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ]
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\weight_decay_1e4_best.pt"
+    },
+    "scheduler_reduce_on_plateau": {
+        "best_epoch": 8,
+        "best_val_accuracy": 0.7864506627393225,
+        "best_val_loss": 1.0206711925182146,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "model": "SimpleCNN",
+            "experiment": "learning_rate_scheduling",
+            "schedule": "ReduceLROnPlateau",
+            "optimizer": "Adam",
+            "initial_learning_rate": 0.001,
+            "factor": 0.5,
+            "patience": 2,
+            "weight_decay": 0,
+            "num_classes": 8,
+            "dropout": 0.0,
+            "use_gap": false,
+            "batch_size": 32,
+            "epochs": 10,
+            "train_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ],
+            "val_transform": [
+                "LetterBox",
+                "Resize(224,224)",
+                "ToTensor",
+                "Normalize"
+            ]
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\scheduler_reduce_on_plateau_best.pt"
+    },
+    "balanced_batches_standard_shuffle": {
+        "best_epoch": 3,
+        "best_val_accuracy": 0.7363770250368189,
+        "best_val_loss": 0.9004840543589641,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "experiment": "balanced_batches",
+            "sampling": "shuffle=True",
+            "batch_size": 32,
+            "learning_rate": 0.001,
+            "simulated_imbalance": true,
+            "selected_classes": [
+                "ambulance",
+                "autobus",
+                "kamyun"
+            ],
+            "retain_fraction": 0.3
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\balanced_batches_standard_shuffle_best.pt"
+    },
+    "balanced_batches_sampler": {
+        "best_epoch": 7,
+        "best_val_accuracy": 0.6686303387334315,
+        "best_val_loss": 1.6912803595476895,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "experiment": "balanced_batches",
+            "sampling": "BalancedBatchSampler",
+            "batch_size": 32,
+            "learning_rate": 0.001,
+            "simulated_imbalance": true,
+            "selected_classes": [
+                "ambulance",
+                "autobus",
+                "kamyun"
+            ],
+            "retain_fraction": 0.3
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\balanced_batches_sampler_best.pt"
+    },
+    "bce_loss": {
+        "best_epoch": 6,
+        "best_val_accuracy": 0.7879234167893961,
+        "best_val_loss": 0.21273018231009172,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "loss": "BCEWithLogitsLoss",
+            "optimizer": "Adam",
+            "learning_rate": 0.001,
+            "weight_decay": 0,
+            "dropout": 0.0,
+            "use_gap": false,
+            "epochs": 10,
+            "seed": 42
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\bce_loss_best.pt"
+    },
+    "gap": {
+        "best_epoch": 22,
+        "best_val_accuracy": 0.5846833578792342,
+        "best_val_loss": 1.1791031102544254,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "experiment": "GAP",
+            "architecture": "SimpleCNN",
+            "num_classes": 8,
+            "use_gap": true,
+            "dropout": 0.0,
+            "loss": "CrossEntropyLoss",
+            "optimizer": "Adam",
+            "learning_rate": 0.001,
+            "weight_decay": 0,
+            "epochs": 50,
+            "seed": 42
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\gap_best.pt"
+    },
+    "resnet18_feature_extraction": {
+        "best_epoch": 11,
+        "best_val_accuracy": 0.8689248895434463,
+        "best_val_loss": 0.42031649106205476,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "architecture": "ResNet18",
+            "weights": "ImageNet pretrained",
+            "strategy": "feature_extraction",
+            "num_classes": 8,
+            "input_size": [
+                224,
+                224
+            ],
+            "normalization": "ImageNet",
+            "optimizer": "Adam",
+            "learning_rate": 0.001,
+            "weight_decay": 0,
+            "seed": 42,
+            "trainable_layers": [
+                "fc"
+            ]
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\resnet18_feature_extraction_best.pt"
+    },
+    "resnet18_finetuning": {
+        "best_epoch": 12,
+        "best_val_accuracy": 0.9396170839469808,
+        "best_val_loss": 0.27025219100213366,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "architecture": "ResNet18",
+            "weights": "ImageNet pretrained",
+            "strategy": "fine_tuning",
+            "num_classes": 8,
+            "input_size": [
+                224,
+                224
+            ],
+            "normalization": "ImageNet",
+            "optimizer": "Adam",
+            "learning_rates": {
+                "layer4": 0.0001,
+                "fc": 0.001
+            },
+            "weight_decay": 0,
+            "seed": 42,
+            "trainable_layers": [
+                "layer4",
+                "fc"
+            ]
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\resnet18_finetuning_best.pt"
+    },
+    "resnet18_full_finetuning": {
+        "best_epoch": 3,
+        "best_val_accuracy": 0.9602356406480118,
+        "best_val_loss": 0.13260844463190347,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "model": "ResNet18",
+            "weights": "ImageNet pretrained",
+            "training_mode": "full_fine_tuning",
+            "optimizer": "Adam",
+            "backbone_lr": 0.0001,
+            "head_lr": 0.001,
+            "loss": "CrossEntropyLoss",
+            "num_classes": 8,
+            "epochs": 25,
+            "seed": 42
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\resnet18_full_finetuning_best.pt"
+    },
+    "resnet18_full_finetuning_non_normalized": {
+        "best_epoch": 8,
+        "best_val_accuracy": 0.9631811487481591,
+        "best_val_loss": 0.13793385552869866,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "model": "ResNet18",
+            "weights": "ImageNet pretrained",
+            "training_mode": "full_fine_tuning_non_normalized",
+            "optimizer": "Adam",
+            "backbone_lr": 0.0001,
+            "head_lr": 0.001,
+            "loss": "CrossEntropyLoss",
+            "num_classes": 8,
+            "epochs": 25,
+            "seed": 42
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\resnet18_full_finetuning_non_normalized_best.pt"
+    },
+    "resnet18_full_finetuning_final": {
+        "best_epoch": 8,
+        "best_val_accuracy": 0.9720176730486009,
+        "best_val_loss": 0.11323099248483297,
+        "seed": 42,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "architecture": "ResNet18",
+            "weights": "ImageNet pretrained",
+            "strategy": "FinalModel_ResnetFull_Finetune",
+            "num_classes": 8,
+            "input_size": [
+                224,
+                224
+            ],
+            "normalization": "ImageNet",
+            "augmentation": [
+                "hflip",
+                "rotation10",
+                "color_jitter"
+            ],
+            "dropout": 0.3,
+            "optimizer": "Adam",
+            "backbone_lr": 0.0001,
+            "head_lr": 0.001,
+            "weight_decay": 0.0001,
+            "scheduler": "ReduceLROnPlateau(mode=max, factor=0.5, patience=3)",
+            "seed": 42,
+            "trainable_layers": "all"
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\resnet18_full_finetuning_final_best.pt"
+    },
+    "resnet18_full_finetuning_letterbox": {
+        "best_epoch": 20,
+        "best_val_accuracy": 0.9808541973490427,
+        "best_val_loss": 0.08627265958361577,
+        "seed": 7,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "architecture": "ResNet18",
+            "weights": "ImageNet pretrained",
+            "strategy": "FinalModel_ResnetFull_Finetune",
+            "num_classes": 8,
+            "input_size": [
+                224,
+                224
+            ],
+            "normalization": "ImageNet",
+            "train transform": [
+                "letterbox",
+                "hflip",
+                "rotation10"
+            ],
+            "optimizer": "Adam",
+            "backbone_lr": 0.0001,
+            "head_lr": 0.0001,
+            "weight_decay": 0.0001,
+            "scheduler": "ReduceLROnPlateau(mode=max, factor=0.03, patience=10)",
+            "seed": 7,
+            "trainable_layers": "all"
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\resnet18_full_finetuning_letterbox_best.pt"
+    },
+    "resnet18_full_finetuning_non_letterbox": {
+        "best_epoch": 122,
+        "best_val_accuracy": 0.9837997054491899,
+        "best_val_loss": 0.08869449226146246,
+        "seed": 7,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "architecture": "ResNet18",
+            "weights": "ImageNet pretrained",
+            "strategy": "FinalModel_ResnetFull_Finetune",
+            "num_classes": 8,
+            "input_size": [
+                224,
+                224
+            ],
+            "normalization": "ImageNet",
+            "train transform": [
+                "hflip",
+                "rotation10"
+            ],
+            "optimizer": "Adam",
+            "backbone_lr": 0.0001,
+            "head_lr": 0.0001,
+            "weight_decay": 0.0001,
+            "scheduler": "ReduceLROnPlateau(mode=max, factor=0.03, patience=10)",
+            "seed": 7,
+            "trainable_layers": "all"
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\resnet18_full_finetuning_non_letterbox_best.pt"
+    },
+    "resnet18_full_finetuning_non_letterbox1": {
+        "best_epoch": 191,
+        "best_val_accuracy": 0.9852724594992637,
+        "best_val_loss": 0.07197527809059388,
+        "seed": 7,
+        "class_to_idx": {
+            "ambulance": 0,
+            "autobus": 1,
+            "kamyun": 2,
+            "kamyunet": 3,
+            "minibus": 4,
+            "savari": 5,
+            "taxi": 6,
+            "vanet": 7
+        },
+        "config": {
+            "architecture": "ResNet18",
+            "weights": "ImageNet pretrained",
+            "strategy": "FinalModel_ResnetFull_Finetune",
+            "num_classes": 8,
+            "input_size": [
+                224,
+                224
+            ],
+            "normalization": "ImageNet",
+            "train transform": [
+                "hflip",
+                "rotation10"
+            ],
+            "optimizer": "Adam",
+            "backbone_lr": 0.0001,
+            "head_lr": 0.0001,
+            "weight_decay": 0.0001,
+            "scheduler": "ReduceLROnPlateau(mode=max, factor=0.03, patience=10)",
+            "seed": 7,
+            "trainable_layers": "all"
+        },
+        "threshold": null,
+        "checkpoint": "checkpoints\\resnet18_full_finetuning_non_letterbox1_best.pt"
+    }
+}
