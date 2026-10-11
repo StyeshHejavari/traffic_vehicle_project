@@ -433,9 +433,9 @@
         "checkpoint": "checkpoints\\balanced_batches_sampler_best.pt"
     },
     "bce_loss": {
-        "best_epoch": 6,
-        "best_val_accuracy": 0.7879234167893961,
-        "best_val_loss": 0.21273018231009172,
+        "best_epoch": 5,
+        "best_val_accuracy": 0.7849779086892489,
+        "best_val_loss": 0.1776302380265122,
         "seed": 42,
         "class_to_idx": {
             "ambulance": 0,
