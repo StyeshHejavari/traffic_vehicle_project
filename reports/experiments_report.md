@@ -13,12 +13,13 @@
 ### **Letterbox Preprocessing**
 
 To preserve the original aspect ratio of vehicle images, a **letterbox preprocessing** method was applied. Each image was first resized proportionally so that it fit within the target size of **224×224 pixels**. The remaining empty areas were then filled with black pixels, and the resized image was centered within the 224×224 frame. This prevents geometric distortion caused by directly stretching images to a square shape while providing a fixed input size for the CNN and ResNet18 models.
+
 <p align="center">
   <img src="img/letterbox.png" width="900">
 </p>
 
 <p align="center">
-  <em>Examples of the eight vehicle classes in the dataset.</em>
+  <em>Display of Letter Box on the Images.</em>
 </p>
 
 
@@ -78,7 +79,7 @@ Refactored preprocessing pipeline (`src/preprocess.py`) run against the current 
 </p>
 
 <p align="center">
-  <em>Display of Letter Box on the Images.</em>
+  <em>Examples of the eight vehicle classes in the dataset.</em>
 </p>
 
 Largest/smallest ratio: 500/205 ≈ 2.44×. This merged set (3,392 images) is the input to every experiment below; the 80/20 split gives **2,713 training / 679 validation** images throughout.
