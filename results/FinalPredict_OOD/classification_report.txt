@@ -1,0 +1,14 @@
+              precision    recall  f1-score   support
+
+   ambulance     1.0000    0.9800    0.9899        50
+     autobus     1.0000    1.0000    1.0000        50
+      kamyun     1.0000    0.9000    0.9474        50
+    kamyunet     0.9259    1.0000    0.9615        50
+     minibus     0.9804    1.0000    0.9901        50
+      savari     1.0000    1.0000    1.0000        50
+        taxi     1.0000    1.0000    1.0000        50
+       vanet     0.9804    1.0000    0.9901        50
+
+    accuracy                         0.9850       400
+   macro avg     0.9858    0.9850    0.9849       400
+weighted avg     0.9858    0.9850    0.9849       400

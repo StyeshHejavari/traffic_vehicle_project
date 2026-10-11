@@ -1,0 +1,11 @@
+Metric,Value
+Known Test Loss,0.06410795770115074
+Known Test Accuracy,0.985
+Total Test Images,400.0
+Wrong Known Predictions,6.0
+Unknown,3.0
+Needs Review,47.0
+Known,350.0
+Neysan Known Failures,0.0
+Energy Threshold,-5.905742168426514
+Mahalanobis Threshold,20.15118980407715

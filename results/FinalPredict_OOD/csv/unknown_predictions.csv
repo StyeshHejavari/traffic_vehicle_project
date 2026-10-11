@@ -1,0 +1,4 @@
+image_path,true_class,predicted_class,confidence,loss,energy,mahalanobis,energy_ood,mahalanobis_ood,status,is_true_nissan,has_explicit_nissan_label,has_external_ground_truth
+d:\AI Bootcamp_M Sharif\traffic_vehicle_project\dataset\test\autobus\198592842.jpg,autobus,autobus,0.6871758103370667,0.37516510486602783,-5.601271152496338,21.205211639404297,True,True,unknown,False,False,False
+d:\AI Bootcamp_M Sharif\traffic_vehicle_project\dataset\test\kamyun\217258940.jpg,kamyun,kamyunet,0.5773811936378479,1.289069652557373,-4.658116340637207,22.3841552734375,True,True,unknown,False,False,False
+d:\AI Bootcamp_M Sharif\traffic_vehicle_project\dataset\test\kamyunet\218055101.jpg,kamyunet,kamyunet,0.9166180491447449,0.08706440031528473,-5.411497592926025,20.696054458618164,True,True,unknown,False,False,False

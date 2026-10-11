@@ -1,0 +1,9 @@
+,ambulance,autobus,kamyun,kamyunet,minibus,savari,taxi,vanet
+ambulance,49,0,0,0,0,0,0,1
+autobus,0,50,0,0,0,0,0,0
+kamyun,0,0,45,4,1,0,0,0
+kamyunet,0,0,0,50,0,0,0,0
+minibus,0,0,0,0,50,0,0,0
+savari,0,0,0,0,0,50,0,0
+taxi,0,0,0,0,0,0,50,0
+vanet,0,0,0,0,0,0,0,50

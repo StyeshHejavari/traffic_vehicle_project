@@ -1,0 +1,7 @@
+image_path,true_class,predicted_class,confidence,loss,energy,mahalanobis,energy_ood,mahalanobis_ood,status,is_true_nissan,has_explicit_nissan_label,has_external_ground_truth
+d:\AI Bootcamp_M Sharif\traffic_vehicle_project\dataset\test\ambulance\215936132.jpg,ambulance,vanet,0.9972142577171326,5.91327428817749,-8.893117904663086,17.527828216552734,False,False,known,False,False,False
+d:\AI Bootcamp_M Sharif\traffic_vehicle_project\dataset\test\kamyun\212881811.jpg,kamyun,kamyunet,0.995417594909668,5.676793098449707,-6.498109817504883,15.215924263000488,False,False,known,False,False,False
+d:\AI Bootcamp_M Sharif\traffic_vehicle_project\dataset\test\kamyun\215619169.jpg,kamyun,kamyunet,0.9657743573188782,3.386200189590454,-6.9927754402160645,19.469696044921875,False,False,known,False,False,False
+d:\AI Bootcamp_M Sharif\traffic_vehicle_project\dataset\test\kamyun\215662509.jpg,kamyun,minibus,0.5845003128051758,1.1244620084762573,-3.6861748695373535,15.379316329956055,True,False,needs_review,False,False,False
+d:\AI Bootcamp_M Sharif\traffic_vehicle_project\dataset\test\kamyun\216034399.jpg,kamyun,kamyunet,0.973527729511261,3.900015115737915,-5.21910285949707,14.07750129699707,True,False,needs_review,False,False,False
+d:\AI Bootcamp_M Sharif\traffic_vehicle_project\dataset\test\kamyun\217258940.jpg,kamyun,kamyunet,0.5773811936378479,1.289069652557373,-4.658116340637207,22.3841552734375,True,True,unknown,False,False,False
